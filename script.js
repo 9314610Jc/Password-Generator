@@ -1,7 +1,5 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-
-// Write password to the #password input
 var passLength = prompt("how long do you want your password to be from 8-128 characters?")
 var charTypes = [
     'Special',
@@ -9,81 +7,69 @@ var charTypes = [
     'lowercase',
     'Numeric'
 ];
-var charTypeChoices = [];
-for( var i = 0; i < charTypes.length; i++){
-    charTypeChoices.push(confirm('Do you want ' + charTypes[i] + ' characters in your password?'));
-};
+var charChoiceArray = [];
 var completeCharSet = [
     '!@#$%^&*-?',
     'QWERTYUIOPASDFGHJKLZXCVBNM',
     'qwertyuiopasdfghjklzxcvbnm',
     '0123456789'
 ];
-
-
+console.log(completeCharSet);
+// array of true or false for each character set
+var charTypeChoices = [];
 
 var charSet = [];
 
-//var pcChoice = Math.floor((Math.random()* (charSet.length + 1))); 
-//var pcChoice2 = Math.floor((Math.random() * charSet[pcChoice]));
 
 
-//var charChoice = charSet[pcChoice].charAt(pcChoice2);
+for( var i = 0; i < charTypes.length; i++){
+    charTypeChoices.push(confirm('Do you want ' + charTypes[i] + ' characters in your password?'));
+};
 
 
-var charChoiceArray = [];
+
 console.log(passLength, charTypeChoices);
 
-function pcChoice(){
-    var pcChoice = Math.floor((Math.random()* (charSet.length + 1))); 
-    console.log(pcChoice)
-    return pcChoice
-};
-function pcChoice2(){
-    var pcChoice2 = Math.floor((Math.random() * charSet[pcChoice()]));
-    console.log(pcChoice2)
-    return pcChoice2
-};
-function charChoice(){
-    var charChoice = charSet[pcChoice()].charAt(pcChoice2());
-    console.log(charChoice)
-    return charChoice 
-    
+function charSt(item, index){
+    if (item == true){
+        charSet.push(completeCharSet[index]);
+         }
 };
 
-function generatePassword(passLength, ...charTypeChoices){
-//var charSet = [];
-// loop will run for as long as pass length
-    for(var z = 0; z < passLength + 1; z++){
-//   for(var y = 0; y < charTypeChoices.length; i++){
-        if (charTypeChoices === true){
-                charSet.push(completeCharSet[z]);
-                console.log(charSet);
-             }
-            pcChoice();
-            pcChoice2();
-            charChoice();
-            return charChoiceArray.push(charChoice());
-            
-//pick random charset in array
-//  var pcChoice = Math.floor((Math.random()* (charSet.length + 1))); 
-// var charChoice = charSet[pcChoice].charAt(pcChoice2);
-        };
-        
-        var charString = charChoiceArray.toString();
-        console.log(charString); 
+charTypeChoices.forEach(charSt);
+console.log(charSet);
+
     
-    };
+
+function charChoice(){
+
+    let arrayChoice = charSet[Math.floor(Math.random()* charSet.length)];
+    let charChoice = arrayChoice.charAt(Math.floor(Math.random()* arrayChoice.length));
+    return charChoiceArray.push(charChoice);
+};
+
+function generatePassword(){
+    charChoiceArray = [];
+
+    for (var j = 0; j < passLength;j++){
+        charChoice();
+    }
+    return charChoiceArray.join('');
+};
+
 
 
 
 function writePassword() {
+
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
 
-}
+};
+
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
