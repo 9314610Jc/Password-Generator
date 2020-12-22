@@ -43,7 +43,7 @@ console.log(charSet);
 //picks random string then picks random char in string and returns into char choice arrays
 function charChoice(){
     let stringChoice = charSet[Math.floor(Math.random()* charSet.length)];
-    let charChoice = stringChoice.charAt(Math.floor(Math.random()* arrayChoice.length));
+    let charChoice = stringChoice.charAt(Math.floor(Math.random()* stringChoice.length));
     return charChoiceArray.push(charChoice);
 };
 //
